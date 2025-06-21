@@ -91,6 +91,7 @@ export function DataTableToolbar<TData extends RowData<string>>({
 
         <Button
           size="sm"
+          className="bg-green-600"
           onClick={() => {
             setIsAddOpen(true);
           }}>

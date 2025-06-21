@@ -118,7 +118,7 @@ export const AddOrderForm = ({ setIsOpen }: { setIsOpen: Dispatch<SetStateAction
           <Button
             type="submit"
             disabled={isPending}
-            className="w-full"
+            className="w-full bg-green-600"
           >
             <>
               {isPending ? (
