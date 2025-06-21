@@ -9,10 +9,13 @@ import { Form } from "@/components/ui/form"
 import { FormError } from "@/components/form-error"
 import { FormSuccess } from "@/components/form-success"
 import { Loader2 } from "lucide-react"
-import { layoutEntity } from "@/lib/layout-entity"
 import { deleteSchema } from "@/schemas"
+import { deleteOrder } from "@/actions/order/deleteOrder"
+import { useRouter } from "next/navigation"
 
-export const DeleteForm = ({ id, setIsOpen,layout }: { id: number, setIsOpen: Dispatch<SetStateAction<boolean>>,layout : layoutEntity }) => {
+export const DeleteForm = ({ id, setIsOpen }: { id: number, setIsOpen: Dispatch<SetStateAction<boolean>> }) => {
+    const router = useRouter()
+  
   const [error, setError] = useState<string | undefined>('')
   const [success, setSuccess] = useState<string | undefined>('')
   const [isPending, startTransition] = useTransition()
@@ -28,22 +31,22 @@ export const DeleteForm = ({ id, setIsOpen,layout }: { id: number, setIsOpen: Di
     setError("");
     setSuccess("");
     startTransition(() => {
-      // deleteEntity(payload,layout)
-      //   .then((data) => {
-      //     if (data.error) {
-      //       setError(data.error)
-      //     }
-      //     if (data.success) {
-      //       setSuccess(data.success)
-      //       router.refresh()
-      //       try {
-      //         setIsOpen(false);
-      //       } catch (error) {
-      //         console.log(error);
-      //       }
-      //     }
-      //   })
-      //   .catch(() => setError('Something went wrong!'))
+      deleteOrder(payload)
+        .then((data) => {
+          if (data.error) {
+            setError(data.error)
+          }
+          if (data.success) {
+            setSuccess(data.success)
+            router.refresh()
+            try {
+              setIsOpen(false);
+            } catch (error) {
+              console.log(error);
+            }
+          }
+        })
+        .catch(() => setError('Something went wrong!'))
     })
   }
   return (

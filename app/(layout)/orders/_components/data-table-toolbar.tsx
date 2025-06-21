@@ -11,7 +11,7 @@ import { CirclePlus, TrashIcon } from "lucide-react";
 import { CalendarDatePicker } from "@/components/calendar-date-picker";
 import { ResponsiveDialog } from "@/components/responsive-dialog";
 import { AddOrderForm } from "@/components/layout/crud-forms/orders/add-order-form";
-import { layoutEntity } from "@/lib/layout-entity";
+import { DeleteManyForm } from "@/components/layout/crud-forms/deleteMany";
 
 interface RowData<T> {
   id: number;
@@ -76,14 +76,14 @@ export function DataTableToolbar<TData extends RowData<string>>({
               <TrashIcon className="mr-2 size-4" aria-hidden="true" />
               Delete ({table.getFilteredSelectedRowModel().rows.length})
             </Button>
-            {/* <ResponsiveDialog
+            <ResponsiveDialog
               isOpen={isMultiDeleteOpen}
               setIsOpen={setIsMultiDeleteOpen}
               title="Delete All Orders"
               description={`Are you sure you want to delete these selected Orders (${table.getFilteredSelectedRowModel().rows.length})`}
             >
-              <DeleteManyForm idList={Object.values(table.getSelectedRowModel().rowsById).map(item => item.original.id)} setIsOpen={setIsMultiDeleteOpen} layout={layoutEntity.ORDERS} />
-            </ResponsiveDialog> */}
+              <DeleteManyForm ids={Object.values(table.getSelectedRowModel().rowsById).map(item => item.original.id)} setIsOpen={setIsMultiDeleteOpen}/>
+            </ResponsiveDialog>
           </>
         ) : null}
         <DataTableViewOptions table={table} />

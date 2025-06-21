@@ -8,7 +8,6 @@ import { Dispatch, SetStateAction, useState, useTransition } from "react"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -21,6 +20,7 @@ import { Loader2 } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { editOrderSchema } from "@/schemas"
 import { Order } from "@prisma/client"
+import { editOrder } from "@/actions/order/editOrder"
 
 export const EditOrderForm = ({ order, setIsOpen }: { order: Order, setIsOpen: Dispatch<SetStateAction<boolean>> }) => {
   const router = useRouter()
@@ -40,22 +40,22 @@ export const EditOrderForm = ({ order, setIsOpen }: { order: Order, setIsOpen: D
     setError("");
     setSuccess("");
     startTransition(() => {
-      // editUser(payload, user.id)
-      //   .then((data) => {
-      //     if (data.error) {
-      //       setError(data.error)
-      //     }
-      //     if (data.success) {
-      //       setSuccess(data.success)
-      //       router.refresh()
-      //       try {
-      //         setIsOpen(false);
-      //       } catch (error) {
-      //         console.log(error);
-      //       }
-      //     }
-      //   })
-      //   .catch(() => setError('Something went wrong!'))
+      editOrder(payload, order.id)
+        .then((data) => {
+          if (data.error) {
+            setError(data.error)
+          }
+          if (data.success) {
+            setSuccess(data.success)
+            router.refresh()
+            try {
+              setIsOpen(false);
+            } catch (error) {
+              console.log(error);
+            }
+          }
+        })
+        .catch(() => setError('Something went wrong!'))
     })
   }
   return (

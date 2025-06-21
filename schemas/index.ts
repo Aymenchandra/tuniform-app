@@ -5,6 +5,10 @@ export const deleteSchema = z.object({
     id: z.number()
 });
 
+export const deleteManySchema = z.object({
+    ids: z.number().array()
+});
+
 export const AddOrderSchema = z.object({
     customer_name: z.string().min(1, {
         message: "Name is required"

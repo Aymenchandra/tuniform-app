@@ -13,7 +13,6 @@ import { MoreHorizontal, SquarePen, Trash2 } from "lucide-react";
 import IconMenu from "@/components/icon-menu";
 import { ResponsiveDialog } from "@/components/responsive-dialog";
 import { DeleteForm } from "@/components/layout/crud-forms/delete-form";
-import { layoutEntity } from "@/lib/layout-entity";
 import { Order } from "@prisma/client";
 import { EditOrderForm } from "@/components/layout/crud-forms/orders/edit-order-form";
 
@@ -48,7 +47,7 @@ export function DataTableRowActions<TData extends RowData<string>>({
         title="Delete Order"
         description="Are you sure you want to delete this order?"
       >
-        <DeleteForm id={row.original.id} setIsOpen={setIsDeleteOpen} layout={layoutEntity.ORDERS} />
+        <DeleteForm id={row.original.id} setIsOpen={setIsDeleteOpen} />
       </ResponsiveDialog>
 
       <DropdownMenu>

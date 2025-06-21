@@ -10,11 +10,10 @@ import { FormError } from "@/components/form-error"
 import { FormSuccess } from "@/components/form-success"
 import { Loader2 } from "lucide-react"
 import { useRouter } from "next/navigation"
-import { layoutEntity } from "@/lib/layout-entity"
 import { deleteManySchema } from "@/schemas"
-import { deleteManyEntity } from "@/actions/crud/deleteMany"
+import { deleteManyOrder } from "@/actions/order/deleteMultiOrder"
 
-export const DeleteManyForm = ({ idList, setIsOpen, layout }: { idList: string[], setIsOpen: Dispatch<SetStateAction<boolean>>,layout: layoutEntity }) => {
+export const DeleteManyForm = ({ ids, setIsOpen }: { ids: number[], setIsOpen: Dispatch<SetStateAction<boolean>> }) => {
   const router = useRouter()
   const [error, setError] = useState<string | undefined>('')
   const [success, setSuccess] = useState<string | undefined>('')
@@ -23,7 +22,7 @@ export const DeleteManyForm = ({ idList, setIsOpen, layout }: { idList: string[]
   const form = useForm<z.infer<typeof deleteManySchema>>({
     resolver: zodResolver(deleteManySchema),
     defaultValues: {
-      idList: idList
+      ids: ids
     }
   })
 
@@ -31,7 +30,7 @@ export const DeleteManyForm = ({ idList, setIsOpen, layout }: { idList: string[]
     setError("");
     setSuccess("");
     startTransition(() => {
-      deleteManyEntity(payload,layout)
+      deleteManyOrder(payload)
         .then((data) => {
           if (data.error) {
             setError(data.error)

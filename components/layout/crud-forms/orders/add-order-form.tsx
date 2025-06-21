@@ -20,6 +20,7 @@ import { FormSuccess } from "@/components/form-success"
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { AddOrderSchema } from '@/schemas';
+import { addOrder } from '@/actions/order/addOrder';
 
 export const AddOrderForm = ({ setIsOpen }: { setIsOpen: Dispatch<SetStateAction<boolean>>; }) => {
 
@@ -40,19 +41,19 @@ export const AddOrderForm = ({ setIsOpen }: { setIsOpen: Dispatch<SetStateAction
     setError("");
     setSuccess("");
     startTransition(() => {
-      // addUser(payload)
-      //   .then((data) => {
-      //     if (data.success) {
-      //       setSuccess(data.success)
-      //       router.refresh()
-      //       try {
-      //         setIsOpen(false);
-      //       } catch (error) {
-      //         console.log(error);
-      //       }
-      //     }
-      //     setError(data.error)
-      //   })
+      addOrder(payload)
+        .then((data) => {
+          if (data.success) {
+            setSuccess(data.success)
+            router.refresh()
+            try {
+              setIsOpen(false);
+            } catch (error) {
+              console.log(error);
+            }
+          }
+          setError(data.error)
+        })
     })
 
   }
