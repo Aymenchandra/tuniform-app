@@ -9,7 +9,7 @@ export const Hero = () => {
         <div className="flex items-center w-full lg:w-1/2">
           <div className="max-w-2xl mb-8">
             <h1 className="text-4xl font-bold leading-snug tracking-tight text-gray-800 lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight dark:text-white">
-              Tuniform startups
+              Tuniform startup
             </h1>
             <p className="py-5 text-xl leading-normal text-gray-500 lg:text-xl xl:text-2xl dark:text-gray-300">
               Welcome! We're glad you're here. Explore, connect, and enjoy a space designed to inspire, inform, and support your journey every step of the way.
@@ -45,7 +45,7 @@ export const Hero = () => {
           </div>
         </div>
         <div className="flex items-center justify-center w-full lg:w-1/2">
-          <div className="">
+          <div>
             <Image
               src={heroImg}
               width="616"
